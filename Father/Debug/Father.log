@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Users\Gal\Desktop\MasterDeg\Os\hw1\Ex1\Father\main.c(34,24): warning C4552: '<': result of expression not used
+  Father.vcxproj -> C:\Users\Gal\Desktop\MasterDeg\Os\hw1\Ex1\Debug\Father.exe

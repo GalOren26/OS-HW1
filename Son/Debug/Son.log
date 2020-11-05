@@ -1,0 +1,7 @@
+﻿  HardCodedData.h
+  ShareFunctions.cpp
+  main.cpp
+C:\Users\Gal\Desktop\MasterDeg\Os\hw1\Ex1\Son\main.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+C:\Users\Gal\Desktop\MasterDeg\Os\hw1\Ex1\Share\ShareFunctions.cpp(15): warning C4715: 'CheakArgs': not all control paths return a value
+  Son.vcxproj -> C:\Users\Gal\Desktop\MasterDeg\Os\hw1\Ex1\Debug\Son.exe
