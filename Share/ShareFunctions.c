@@ -23,10 +23,10 @@ void CheakArgs(int argc)
 		}
 	}
 
-	void OpenFileWarp(FILE* file,char*str,char mode)
+	void OpenFileWarp(FILE** p_file,const char*str,char* mode)
 	{
 
-			int file_status = (int)fopen_s(file, str, mode);
+			errno_t file_status = fopen_s(p_file, str, mode);
 			if (0 != file_status)
 			{
 				printf_s("Failed to open file.\n");
