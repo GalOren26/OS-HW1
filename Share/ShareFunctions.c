@@ -13,7 +13,7 @@ void CheakArgs(int argc)
 		exit(ERR_CODE_TOO_MANY_ARGUMENTS);
 	}
 }
-	void CloseFileWarp(FILE * file)
+	void CloseFileWrap(FILE * file)
 	{
 		errno_t file_status = fclose(file);
 		if (file_status)
@@ -23,7 +23,7 @@ void CheakArgs(int argc)
 		}
 	}
 
-	void OpenFileWarp(FILE** p_file,const char*str,char* mode)
+	void OpenFileWrap(FILE** p_file,const char*str,char* mode)
 	{
 
 			errno_t file_status = fopen_s(p_file, str, mode);

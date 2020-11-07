@@ -20,13 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Share\ShareFunctions.c" />
-    <ClCompile Include="..\Share\SonFunctions.c" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="SonFunctions.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Share\HardCodedData.h" />
     <ClInclude Include="..\Share\ShareFunctions.h" />
-    <ClInclude Include="..\Share\SonFunctions.h" />
+    <ClInclude Include="SonFunctions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

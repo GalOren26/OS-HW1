@@ -1,1 +1,6 @@
-﻿
+﻿  ShareFunctions.c
+  main.c
+  SonFunctions.c
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Son\SonFunctions.c(6,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Son.vcxproj -> C:\Users\Eran\Desktop\תואר שני\Os\OS\Debug\Son.exe

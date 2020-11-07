@@ -1,0 +1,9 @@
+﻿  ShareFunctions.c
+  main.c
+  SonFunctions.c
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Son\SonFunctions.c(10,6): warning C4013: 'exit' undefined; assuming extern returning int
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 6 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Son.vcxproj -> C:\Users\Eran\Desktop\תואר שני\Os\OS\x64\Release\Son.exe

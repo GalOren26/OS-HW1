@@ -1,0 +1,7 @@
+﻿  ShareFunctions.c
+  main.c
+  SonFunctions.c
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Son\SonFunctions.c(4,28): warning C4013: 'strlen' undefined; assuming extern returning int
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Son\SonFunctions.c(10,6): warning C4013: 'exit' undefined; assuming extern returning int
+  Generating Code...
+  Son.vcxproj -> C:\Users\Eran\Desktop\תואר שני\Os\OS\x64\Debug\Son.exe

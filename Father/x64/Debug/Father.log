@@ -1,0 +1,9 @@
+﻿  ShareFunctions.c
+  FatherFunctions.c
+  main.c
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Father\main.c(23,10): warning C4101: 'retVal': unreferenced local variable
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Father\main.c(22,11): warning C4101: 'exitcode': unreferenced local variable
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Father\main.c(20,22): warning C4101: 'procinfo': unreferenced local variable
+C:\Users\Eran\Desktop\תואר שני\Os\OS\Father\main.c(21,11): warning C4101: 'waitcode': unreferenced local variable
+  Generating Code...
+  Father.vcxproj -> C:\Users\Eran\Desktop\תואר שני\Os\OS\x64\Debug\Father.exe
