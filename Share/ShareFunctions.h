@@ -8,5 +8,5 @@
 
 void CheakArgs(int argc);
 void CloseFileWrap(FILE* file);
-void OpenFileWrap(FILE** file, const char* str, char* mode);
-void CheakAlocation(void* p_arr);
+int OpenFileWrap(FILE** file, const char* str, char* mode);
+int CheakAlocation(void* p_arr);

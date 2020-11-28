@@ -13,31 +13,33 @@ void CheakArgs(int argc)
 		exit(ERR_CODE_TOO_MANY_ARGUMENTS);
 	}
 }
-	void CloseFileWrap(FILE * file)
+void CloseFileWrap(FILE * file)
+{
+	errno_t file_status = fclose(file);
+	if (file_status)
 	{
-		errno_t file_status = fclose(file);
-		if (file_status)
+		printf("Failed to close file.\n");
+		exit(FAILAD_TO_CLOSE_FILE);
+	}
+}
+
+int OpenFileWrap(FILE** p_file,const char*str,char* mode)
+{
+
+		errno_t file_status = fopen_s(p_file, str, mode);
+		if (0 != file_status)
 		{
-			printf("Failed to close file.\n");
-			exit(FAILAD_TO_CLOSE_FILE);
+			printf_s("Failed to open file.\n");
+			return FAILAD_TO_OPEN_FILE;
 		}
-	}
+		return 0;
+}
 
-	void OpenFileWrap(FILE** p_file,const char*str,char* mode)
-	{
-
-			errno_t file_status = fopen_s(p_file, str, mode);
-			if (0 != file_status)
-			{
-				printf_s("Failed to open file.\n");
-				exit(FAILAD_TO_OPEN_FILE);
-			}
+int CheakAlocation(void* p_arr)
+{
+	if (p_arr == NULL) {
+		printf_s("MEMORY_ALLOCATION_FAILURE.\n");
+		return MEMORY_ALLOCATION_FAILURE;
 	}
-
-	void CheakAlocation(void* p_arr)
-	{
-		if (p_arr == NULL) {
-			printf_s("MEMORY_ALLOCATION_FAILURE.\n");
-			exit(MEMORY_ALLOCATION_FAILURE);
-		}
-	}
+	return 0;
+}

@@ -18,13 +18,21 @@ void  ReadFileToMatrix(FILE* p_forest_file, char***retuend_matrix,int *dim_ret ,
 	}
 	//allocate matrix 
 	p_forest_matrix = (char**)calloc(dim, sizeof(char*));
-	CheakAlocation((void*)p_forest_matrix);
+	if (CheakAlocation((void*)p_forest_matrix) == MEMORY_ALLOCATION_FAILURE) {
+		return MEMORY_ALLOCATION_FAILURE;
+	}
 	// fill matrix 
 	fgets(p_current_line, MAX_LINE_LEN, p_forest_file);
 	for (int i = 0; i<dim; i++)
 	{
 		p_forest_matrix[i] = (char* )calloc(dim+1, sizeof(char));
-		CheakAlocation((void*)p_forest_matrix[i]);
+		if (CheakAlocation((void*)p_forest_matrix[i]) == MEMORY_ALLOCATION_FAILURE) {
+			for (int j = 0; j < i; j++) {
+				free(p_forest_matrix[j]);
+			}
+			free(p_forest_matrix);
+			return MEMORY_ALLOCATION_FAILURE;
+		}
 		//parse the string skip , mul by 2 to skip ,
 		for (int j = 0; j < 2 * dim; j += 2)
 		{
@@ -39,7 +47,7 @@ void  ReadFileToMatrix(FILE* p_forest_file, char***retuend_matrix,int *dim_ret ,
 	*gen_num_ret = gen_num;
 }
 
-void CreateSon(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr)
+int CreateSon(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr)
 {
 	BOOL	retVal;
 	STARTUPINFO	startinfo = { sizeof(STARTUPINFO), NULL, 0 }; /* <ISP> here we */
@@ -63,12 +71,13 @@ void CreateSon(LPTSTR CommandLine, PROCESS_INFORMATION* ProcessInfoPtr)
 	if (retVal == 0)
 	{
 		printf("Process Creation Failed!\n");
-		exit(FAILED_CREATE_PROCESS);
+		return FAILED_CREATE_PROCESS;
 	}
+	return 0;
 }
 
 
-void WaitForSingleObjectWrap(DWORD* waitcode, PROCESS_INFORMATION* procinfo)
+int WaitForSingleObjectWrap(DWORD* waitcode, PROCESS_INFORMATION* procinfo)
 {
 	*waitcode = WaitForSingleObject(
 		procinfo->hProcess,
@@ -85,31 +94,40 @@ void WaitForSingleObjectWrap(DWORD* waitcode, PROCESS_INFORMATION* procinfo)
 		Sleep(10); /* Waiting a few milliseconds for the process to terminate,
 					note the above command may also fail, so another WaitForSingleObject is required.
 					We skip this for brevity */
-		exit(SON_TERMINATING_BRUTALLY);
+		return SON_TERMINATING_BRUTALLY;
 	}
+	return 0;
 }
 
-void SaveStateTofile(DWORD exitcode, char* p_line,int max_size, FILE* p_out_file)
+int SaveStateTofile(DWORD exitcode, char* p_line,int max_size, FILE* p_out_file)
 {
 	if (p_out_file == NULL)
 	{
 		printf("output filw is empty .\n");
-		exit(FAILAD_TO_OPEN_FILE);
+		return FAILAD_TO_OPEN_FILE;
 	}
 	sprintf_s(p_line, max_size, "%s - %d\n", p_line, exitcode);
 	int ret_val=fputs(p_line, p_out_file);
 	if (ret_val > 0)
 	{
 		printf("Failed to write to file.\n");
-		exit(FAILED_WRITE_TO_FILE);
+		return FAILED_WRITE_TO_FILE;
 	}
+	return 0;
 }
 
 void ConvertMatrixToLine(char** p_forest_matrix, char** p_forest_line,int dim,int max_size )
 {
 
 	*p_forest_line = (char*)calloc(max_size, sizeof(char));
-	CheakAlocation((void*)p_forest_line);
+	if (CheakAlocation((void*)p_forest_line) == MEMORY_ALLOCATION_FAILURE) {
+		for (int i = 0; i < dim; i++)
+		{
+			free(p_forest_matrix[i]);
+		}
+		free(p_forest_matrix);
+		exit(MEMORY_ALLOCATION_FAILURE);
+	}
 	for (int i = 0;i < dim; i++)
 	{
 		memcpy(*p_forest_line + i * dim, p_forest_matrix[i], dim);
@@ -128,16 +146,24 @@ void PrintMatrix(char** matrix,int dim)
 
 }
 
-void UpdateMatrix(char** returned_matrix, int dim)
+int UpdateMatrix(char** returned_matrix, int dim)
 {
 	int  count = 0;
 	char** p_temp_matrix = NULL;
 	p_temp_matrix = (char**)malloc(dim * sizeof(char*));
-	CheakAlocation((void*)p_temp_matrix);
+	if (CheakAlocation((void*)p_temp_matrix) == MEMORY_ALLOCATION_FAILURE) {
+		return MEMORY_ALLOCATION_FAILURE;
+	}
 	for (int i = 0; i < dim;i++)
 	{
 		p_temp_matrix[i] = (char*)malloc(dim * sizeof(char));
-		CheakAlocation((void*)p_temp_matrix);
+		if (CheakAlocation((void*)p_temp_matrix) == MEMORY_ALLOCATION_FAILURE) {
+			for (int j = 0; j < i; j++) {
+				free(p_temp_matrix[j]);
+			}
+			free(p_temp_matrix);
+			return MEMORY_ALLOCATION_FAILURE;
+		}
 	}
 	//running over the input matrix and updating the temp matrix:
 	for (int i = 0; i < dim; i++)
@@ -227,4 +253,5 @@ void UpdateMatrix(char** returned_matrix, int dim)
 			free(p_temp_matrix[i]);
 		}
 		free(p_temp_matrix);
+		return 0;
 }
